@@ -16,6 +16,7 @@ import QuickActionPanel from "./components/QuickActionPanel";
 import TodaysLectures from "./components/TodaysLectures";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/todays-lectures" element={<TodaysLectures />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
