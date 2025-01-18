@@ -65,8 +65,8 @@ function ResultsPage() {
             </button>
           </div>
           <div className="ml-2">
-            <h1 className="text-xl">Name : Vipin Yadav</h1>
-            <h2 className="text-xl mt-1">Univ. RollNo : 2215001970</h2>
+            <h1 className="text-xl">Name : Rudra Singh</h1>
+            <h2 className="text-xl mt-1">Univ. RollNo : 2215..19..</h2>
           </div>
         </div>
       </div>

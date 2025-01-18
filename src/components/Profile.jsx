@@ -7,35 +7,35 @@ export default function Profile() {
   const [activeCard, setActiveCard] = useState(null);
 
   const studentInfo = {
-    name: "Vipin Yadav",
-    rollNumber: "2215001970",
-    semester: "V",
-    registrationDate: "28.07.2024",
-    session: "2022-2023",
+    name: "John Doe",
+    rollNumber: "1234567890",
+    semester: "III",
+    registrationDate: "01.01.2023",
+    session: "2023-2024",
     personalDetails: {
-      dateOfBirth: "15.05.2000",
+      dateOfBirth: "01.01.2000",
       gender: "Male",
-      bloodGroup: "O+",
-      nationality: "Indian"
+      bloodGroup: "B+",
+      nationality: "American"
     },
     academicDetails: {
-      course: "B.Tech. Computer Science",
-      batch: "2022-2026",
-      cgpa: "8.5",
-      currentSemester: "5th"
+      course: "B.Sc. Computer Science",
+      batch: "2023-2026",
+      cgpa: "8.9",
+      currentSemester: "3rd"
     },
     communicationDetails: {
-      email: "vipin.yadav_cs22@gla.ac.in",
-      phone: "+91 98765 43210",
-      address: "123 University Road, Mathura, Uttar Pradesh - 281406"
+      email: "john.doe@example.com",
+      phone: "+1 123-456-7890",
+      address: "456 College Avenue, Springfield, USA"
     },
     educationalDetails: {
-      highSchool: "XYZ School",
+      highSchool: "Springfield High School",
       highSchoolYear: "2018",
-      highSchoolPercentage: "92%",
-      intermediateSchool: "ABC College",
+      highSchoolPercentage: "90%",
+      intermediateSchool: "Springfield Community College",
       intermediateYear: "2020",
-      intermediatePercentage: "88%"
+      intermediatePercentage: "85%"
     }
   };
 
@@ -59,7 +59,7 @@ export default function Profile() {
           <div className="flex items-start gap-4">
             <div className="w-24 h-24 rounded-full bg-pink-100 overflow-hidden">
               <img
-                src="/placeholder.svg?height=96&width=96"
+                src="https://upload.wikimedia.org/wikipedia/en/4/42/GLA_University_logo.png?height=96&width=96"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -108,9 +108,9 @@ export default function Profile() {
           />
           <MenuCard
             icon={<Phone className="h-8 w-8 text-green-500" />}
-            title="Communicational Details"
-            onClick={() => handleCardClick("Communicational Details")}
-            isActive={activeCard === "Communicational Details"}
+            title="Communication Details"
+            onClick={() => handleCardClick("Communication Details")}
+            isActive={activeCard === "Communication Details"}
             info={studentInfo.communicationDetails}
           />
           <MenuCard
@@ -158,4 +158,3 @@ function MenuCard({ icon, title, onClick, isActive, info }) {
     </div>
   );
 }
-

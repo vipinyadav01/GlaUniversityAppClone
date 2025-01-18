@@ -17,6 +17,20 @@ import BottomNavigation from "../components/BottomNavigation";
 import { useNavigate } from "react-router-dom";
 import TodaysLectures from "../components/TodaysLectures";
 
+const colors = {
+  primary: "#007bff",
+  secondary: "#6c757d",
+  success: "#28a745",
+  danger: "#dc3545",
+  warning: "#ffc107",
+  info: "#17a2b8",
+  light: "#f8f9fa",
+  dark: "#343a40",
+  blue: "#0dcaf0",
+  orange: "#fd7e14",
+  gray: "#adb5bd",
+};
+
 const Home = () => {
   const [activeTab, setActiveTab] = useState("home");
   const navigate = useNavigate();
@@ -61,24 +75,21 @@ const Home = () => {
           </button>
         </div>
       </header>
-
       {/* Menu Links */}
       {menuVisible && (
         <div className="fixed top-16 left-0 bg-white shadow-xl p-6 rounded-r-2xl h-full w-72 z-40 transition-all duration-300 ease-in-out">
           <div className="flex flex-col items-center mb-8">
             <div className="w-28 h-28 rounded-full bg-blue-500 mb-4 overflow-hidden shadow-lg">
               <img
-                src="/placeholder.svg?height=112&width=112"
+                src="https://upload.wikimedia.org/wikipedia/en/4/42/GLA_University_logo.png"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
             </div>
             <h2 className="text-2xl font-semibold text-gray-800">
-              Vipin Yadav
+              John Doe
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
-              vipin.yadav_cs22@gla.ac.in
-            </p>
+            <p className="text-sm text-gray-600 mt-1">john.doe@gla.ac.in</p>
           </div>
           <ul className="space-y-3">
             <MenuItem
@@ -94,7 +105,7 @@ const Home = () => {
             <MenuItem
               icon={<User />}
               text="Attendance"
-              onClick={() => navigate("/attendance")}
+              onClick={navigateToAttendance}
             />
             <MenuItem
               icon={<FileText />}
@@ -104,7 +115,7 @@ const Home = () => {
             <MenuItem
               icon={<Award />}
               text="Result"
-              onClick={() => navigate("/results")}
+              onClick={navigateToResult}
             />
             <MenuItem
               icon={<Clock />}
@@ -127,7 +138,6 @@ const Home = () => {
           </ul>
         </div>
       )}
-
       <main className="flex-1 container max-w-2xl mx-auto p-6 space-y-8">
         {/* Research Banner */}
         <motion.div
@@ -146,24 +156,23 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="text-center">
-              <p className="text-4xl font-bold text-blue-600">14</p>
+              <p className="text-4xl font-bold text-blue-600">10</p>
               <p className="text-sm text-gray-600 mt-1">Research Centres</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-bold text-blue-600">4400+</p>
+              <p className="text-4xl font-bold text-blue-600">500+</p>
               <p className="text-sm text-gray-600 mt-1">Articles Published</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-bold text-blue-600">157</p>
+              <p className="text-4xl font-bold text-blue-600">120</p>
               <p className="text-sm text-gray-600 mt-1">State-of-the-labs</p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-bold text-blue-600">35+</p>
+              <p className="text-4xl font-bold text-blue-600">20+</p>
               <p className="text-sm text-gray-600 mt-1">Patents Granted</p>
             </div>
           </div>
         </motion.div>
-
         {/* Profile Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -173,19 +182,18 @@ const Home = () => {
         >
           <div className="flex items-center space-x-6">
             <div className="h-20 w-20 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-3xl font-bold text-white shadow-md">
-              VY
+              JD
             </div>
             <div>
               <p className="font-medium text-lg text-gray-800">
-                B.Tech. - CS || V (U) || 2215001970
+                B.Tech. - IT || VI (AM) || 2215.019..
               </p>
               <p className="text-green-500 font-semibold mt-1">
-                Registered On 28.07.2024
+                Registered On 01.08.2026
               </p>
             </div>
           </div>
         </motion.div>
-
         {/* Statistics Section */}
         <div className="grid grid-cols-2 gap-6">
           <motion.div
@@ -199,10 +207,9 @@ const Home = () => {
               </h2>
               <Clock className="text-blue-500 h-8 w-8" />
             </div>
-            <p className="text-4xl font-bold text-blue-600">98.79%</p>
+            <p className="text-4xl font-bold text-blue-600">96.5%</p>
             <p className="text-sm text-gray-500 mt-2">Last updated: Today</p>
           </motion.div>
-
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300"
@@ -212,11 +219,10 @@ const Home = () => {
               <h2 className="text-xl font-semibold text-gray-800">Result</h2>
               <Award className="text-green-500 h-8 w-8" />
             </div>
-            <p className="text-4xl font-bold text-green-600">74%</p>
+            <p className="text-4xl font-bold text-green-600">78%</p>
             <p className="text-sm text-gray-500 mt-2">Last semester</p>
           </motion.div>
         </div>
-
         {/* Today's Lectures */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
           <button
@@ -232,11 +238,9 @@ const Home = () => {
           </button>
           {lecturesVisible && <TodaysLectures />}
         </div>
-
         {/* Quick Actions */}
         <QuickActionPanel />
       </main>
-
       <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
