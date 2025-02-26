@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import AttendancePage from "./pages/AttendancePage";
@@ -41,10 +41,10 @@ function App() {
                 <Route path="/quick-action-panel" element={<QuickActionPanel />} />
                 <Route path="/todays-lectures" element={<TodaysLectures />} />
                 <Route path="/login" element={<LoginPage />} />
-                <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
         </Router>
     );
 }
