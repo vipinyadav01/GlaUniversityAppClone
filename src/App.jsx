@@ -21,6 +21,7 @@ import RegisterPage from "./pages/RegisterPage";
 import NotFound from "./pages/NotFound";
 
 function App() {
+    const [activeTab, setActiveTab] = useState('home');
     return (
         <Router>
             <Routes>
