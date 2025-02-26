@@ -1,131 +1,96 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, User, Home, Bell, MessageSquareMore, X } from "lucide-react";
+import { FileText, User, Home, Bell, MenuSquare, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import QuickActionPanel from "./QuickActionPanel";
 
-const colors = {
-  primary: "#007bff",
-  secondary: "#6c757d",
-  success: "#28a745",
-  danger: "#dc3545",
-  warning: "#ffc107",
-  info: "#17a2b8",
-  light: "#f8f9fa",
-  dark: "#343a40",
-  blue: "#0dcaf0",
-  orange: "#fd7e14",
-  gray: "#adb5bd",
-  purple: "#8B5CF6",
-  yellow: "#EAB308",
-  red: "#EF4444",
-  indigo: "#6366F1",
-};
-
 const navItems = [
-  {
-    icon: MessageSquareMore,
-    label: "QuickAction",
-    path: "/quick-action-panel",
-  },
-  { icon: User, label: "Attendance", path: "/attendance" },
-  { icon: Home, label: "Home", path: "/" },
-  { icon: Bell, label: "Notifications", path: "/notifications" },
-  { icon: FileText, label: "Result", path: "/results" },
+    { icon: MenuSquare, label: "Menu", path: "/quick-action-panel" },
+    { icon: Home, label: "Home", path: "/" },
+    { icon: Bell, label: "Alerts", path: "/notifications" },
+    { icon: User, label: "Profile", path: "/profile" },
 ];
 
 const BottomNavigation = ({ activeTab, setActiveTab }) => {
-  const navigate = useNavigate();
-  const [isQuickActionOpen, setIsQuickActionOpen] = useState(false);
+    const navigate = useNavigate();
+    const [isQuickActionOpen, setIsQuickActionOpen] = useState(false);
 
-  const handleNavigation = (path, label) => {
-    if (label === "QuickAction") {
-      setIsQuickActionOpen(true);
-    } else {
-      setActiveTab(label.toLowerCase());
-      navigate(path);
-    }
-  };
+    const handleNavigation = (path, label) => {
+        if (label === "Menu") {
+            setIsQuickActionOpen(true);
+        } else {
+            setActiveTab(label.toLowerCase());
+            navigate(path);
+        }
+    };
 
-  const handleCloseQuickAction = () => {
-    setIsQuickActionOpen(false);
-  };
+    return (
+        <>
+            <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-40">
+                <div className="flex items-center justify-around h-16 px-2 max-w-lg mx-auto">
+                    {navItems.map((item) => (
+                        <button
+                            key={item.label}
+                            onClick={() => handleNavigation(item.path, item.label)}
+                            className={`flex flex-col items-center justify-center w-full h-full ${activeTab === item.label.toLowerCase()
+                                    ? "text-blue-600"
+                                    : "text-gray-400 hover:text-gray-600"
+                                }`}
+                        >
+                            <item.icon className="w-6 h-6 mb-1" />
+                            <span className="text-xs font-medium">{item.label}</span>
+                            {activeTab === item.label.toLowerCase() && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute bottom-0 w-12 h-1 bg-blue-600 rounded-t-full"
+                                    transition={{ type: "spring", duration: 0.3 }}
+                                />
+                            )}
+                            {item.label === "Alerts" && (
+                                <span className="absolute top-1 right-7 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] flex items-center justify-center">
+                                    3
+                                </span>
+                            )}
+                        </button>
+                    ))}
+                </div>
+            </nav>
 
-  return (
-    <>
-      <nav className="fixed bottom-0 bg-white border-t border-gray-200 w-full shadow-lg">
-        <div className="flex justify-around items-center h-20 px-4">
-          {navItems.map((item) => (
-            <motion.button
-              key={item.label}
-              whileTap={{ scale: 0.95 }}
-              className={`flex flex-col items-center justify-center p-2 w-full h-full relative transition-all duration-300 ease-in-out ${
-                activeTab === item.label.toLowerCase()
-                  ? "text-blue-600 bg-blue-50 rounded-t-xl"
-                  : "text-gray-500 hover:text-blue-600 hover:bg-blue-50 hover:rounded-t-xl"
-              } focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50`}
-              onClick={() => handleNavigation(item.path, item.label)}
-            >
-              <div className="relative">
-                <item.icon
-                  className={`w-7 h-7 mb-1 transition-transform duration-300 ${
-                    activeTab === item.label.toLowerCase() ? "scale-110" : ""
-                  }`}
-                />
-                {item.label === "Notifications" && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center font-bold shadow-md"
-                  >
-                    5
-                  </motion.span>
+            <AnimatePresence>
+                {isQuickActionOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.5 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsQuickActionOpen(false)}
+                            className="fixed inset-0 bg-black z-40"
+                        />
+                        <motion.div
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "100%" }}
+                            transition={{ type: "spring", damping: 25 }}
+                            className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl z-50 p-4 max-h-[80vh] overflow-y-auto"
+                        >
+                            <div className="relative">
+                                <div className="flex justify-center mb-4">
+                                    <div className="w-12 h-1 bg-gray-200 rounded-full" />
+                                </div>
+                                <button
+                                    onClick={() => setIsQuickActionOpen(false)}
+                                    className="absolute right-0 top-0 p-2"
+                                >
+                                    <X className="w-5 h-5 text-gray-500" />
+                                </button>
+                                <QuickActionPanel />
+                            </div>
+                        </motion.div>
+                    </>
                 )}
-              </div>
-              <span
-                className={`text-xs font-medium transition-all duration-300 ${
-                  activeTab === item.label.toLowerCase() ? "font-semibold" : ""
-                }`}
-              >
-                {item.label}
-              </span>
-              {activeTab === item.label.toLowerCase() && (
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 rounded-t-full"
-                  layoutId="activeIndicator"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-              )}
-            </motion.button>
-          ))}
-        </div>
-      </nav>
-      <AnimatePresence>
-        {isQuickActionOpen && (
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-x-0 bottom-0 bg-white shadow-2xl rounded-t-3xl z-50 p-6 max-h-[80vh] overflow-y-auto"
-          >
-            <div className="container mx-auto relative">
-              <div className="flex justify-center items-center mb-6">
-                <div className="bg-gray-300 w-16 h-1 rounded-full"></div>
-              </div>
-              <button
-                onClick={handleCloseQuickAction}
-                className="absolute top-0 right-0 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
-              >
-                <X className="w-6 h-6 text-gray-500" />
-              </button>
-              <QuickActionPanel />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
+            </AnimatePresence>
+        </>
+    );
 };
 
 export default BottomNavigation;
